@@ -229,20 +229,40 @@
 // square.color="blue";
 // square.sideLength=10;
 
-interface Shape{
-  color:string;
+// interface Shape{
+//   color:string;
+// }
+
+// interface PenStroke{
+//   penWidth:number;
+// }
+
+// interface Square extends Shape, PenStroke{
+//   sidelength:number;
+// }
+
+// let square= <Square>{};
+// square.penWidth=5.0;
+// square.color="blue";
+// square.sidelength=10;
+
+// ================== Hybrid Types
+
+interface Counter {
+  (start: number): string;
+  interval: number;
+  reset(): void;
 }
 
-interface PenStroke{
-  penWidth:number;
+function getCounter(): Counter {
+  let counter = <Counter>function (start: number) { };
+  counter.interval = 123;
+  counter.reset = function () { };
+  return counter;
+
 }
 
-interface Square extends Shape, PenStroke{
-  sidelength:number;
-}
-
-let square= <Square>{};
-square.penWidth=5.0;
-square.color="blue";
-square.sidelength=10;
-
+let c = getCounter();
+c(10);
+c.reset();
+c.interval=5.0;
