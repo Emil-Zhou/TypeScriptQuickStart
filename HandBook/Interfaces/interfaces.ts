@@ -172,45 +172,77 @@
 // let myArray2: ReadonlyStringArray = ["Alice", "Bob"];
 // myArray[2] = "Mallory"; // error!
 
-// =============Class Type
+// // =============Class Type
+
+// // interface ClockInterface {
+// //   currentTime: Date;
+// //   setTime(d: Date);
+// // }
+
+// // class Clock implements ClockInterface {
+// //   currentTime: Date;
+// //   setTime(d: Date) {
+// //     this.currentTime = d;
+// //   }
+// //   constructor(h: number, m: number) { }
+// // }
+
+// interface clockConstructor {
+//   new(hour: number, minute: number): ClockInterface;
+// }
 
 // interface ClockInterface {
-//   currentTime: Date;
-//   setTime(d: Date);
+//   tick();
 // }
 
-// class Clock implements ClockInterface {
-//   currentTime: Date;
-//   setTime(d: Date) {
-//     this.currentTime = d;
-//   }
+// function createClock(ctor: clockConstructor, hour: number, minute: number): ClockInterface {
+//   return new ctor(hour, minute);
+// }
+
+// class DigitalClock implements ClockInterface {
+//   constructor (h:number,m:number){}
+//   tick(){
+//     console.log("beep beep");
+//   }  
+// }
+// class AnalogClock implements ClockInterface {
 //   constructor(h: number, m: number) { }
+//   tick() {
+//       console.log("tick tock");
+//   }
 // }
 
-interface clockConstructor {
-  new(hour: number, minute: number): ClockInterface;
+// let digital = createClock(DigitalClock, 12, 17);
+// let analog = createClock(AnalogClock, 7, 32);
+
+// ================ Extending Interfaces
+
+// interface Shape{
+//   color:string;
+// }
+
+// interface Square extends Shape{
+//   sideLength:number;
+// }
+
+// let square = <Square>{};
+// square.color="blue";
+// square.sideLength=10;
+
+interface Shape{
+  color:string;
 }
 
-interface ClockInterface {
-  tick();
+interface PenStroke{
+  penWidth:number;
 }
 
-function createClock(ctor: clockConstructor, hour: number, minute: number): ClockInterface {
-  return new ctor(hour, minute);
+interface Square extends Shape, PenStroke{
+  sidelength:number;
 }
 
-class DigitalClock implements ClockInterface {
-  constructor (h:number,m:number){}
-  tick(){
-    console.log("beep beep");
-  }  
-}
-class AnalogClock implements ClockInterface {
-  constructor(h: number, m: number) { }
-  tick() {
-      console.log("tick tock");
-  }
-}
+let square= <Square>{};
+square.penWidth=5.0;
+square.color="blue";
+square.sidelength=10;
 
-let digital = createClock(DigitalClock, 12, 17);
-let analog = createClock(AnalogClock, 7, 32);
