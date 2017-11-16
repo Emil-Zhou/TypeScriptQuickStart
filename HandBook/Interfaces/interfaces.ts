@@ -246,23 +246,51 @@
 // square.color="blue";
 // square.sidelength=10;
 
-// ================== Hybrid Types
+// // ================== Hybrid Types
 
-interface Counter {
-  (start: number): string;
-  interval: number;
-  reset(): void;
+// interface Counter {
+//   (start: number): string;
+//   interval: number;
+//   reset(): void;
+// }
+
+// function getCounter(): Counter {
+//   let counter = <Counter>function (start: number) { };
+//   counter.interval = 123;
+//   counter.reset = function () { };
+//   return counter;
+
+// }
+
+// let c = getCounter();
+// c(10);
+// c.reset();
+// c.interval=5.0;
+
+
+// ============= Interfaces Extending Classes
+
+class Control {
+  private state: any;
 }
 
-function getCounter(): Counter {
-  let counter = <Counter>function (start: number) { };
-  counter.interval = 123;
-  counter.reset = function () { };
-  return counter;
+interface SelectableControl extends Control {
+  select(): void;
+}
+
+class Button extends Control implements SelectableControl {
+  select() { }
+}
+
+class TextBox extends Control {
 
 }
 
-let c = getCounter();
-c(10);
-c.reset();
-c.interval=5.0;
+//  Error: Property 'state' is missing in type 'Image'.
+class Image implements SelectableControl {
+  select() { }
+}
+
+class Location {
+
+}
