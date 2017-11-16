@@ -1,30 +1,24 @@
 // interface LabelledValue {
 //   label: string;
 // }
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+function createClock(ctor, hour, minute) {
+    return new ctor(hour, minute);
+}
+var DigitalClock = /** @class */ (function () {
+    function DigitalClock(h, m) {
+    }
+    DigitalClock.prototype.tick = function () {
+        console.log("beep beep");
     };
-})();
-var myArray;
-myArray = ["Bob", "Fred"];
-var myStr = myArray[0];
-var Animal = /** @class */ (function () {
-    function Animal() {
-    }
-    return Animal;
+    return DigitalClock;
 }());
-var Dog = /** @class */ (function (_super) {
-    __extends(Dog, _super);
-    function Dog() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var AnalogClock = /** @class */ (function () {
+    function AnalogClock(h, m) {
     }
-    return Dog;
-}(Animal));
-var myArray2 = ["Alice", "Bob"];
-myArray[2] = "Mallory"; // error!
+    AnalogClock.prototype.tick = function () {
+        console.log("tick tock");
+    };
+    return AnalogClock;
+}());
+var digital = createClock(DigitalClock, 12, 17);
+var analog = createClock(AnalogClock, 7, 32);

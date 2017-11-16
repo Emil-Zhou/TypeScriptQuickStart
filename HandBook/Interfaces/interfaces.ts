@@ -143,31 +143,74 @@
 //     return result > -1;
 // }
 
-//============== Indexable Type
-interface StringArray {
-  [index: number]: string
+// //============== Indexable Type
+// interface StringArray {
+//   [index: number]: string
+// }
+
+// let myArray: StringArray;
+// myArray = ["Bob", "Fred"];
+// let myStr: string = myArray[0];
+
+// class Animal {
+//   name: string;
+// }
+
+// class Dog extends Animal {
+//   breed: string;
+// }
+
+// interface NumberDictionary {
+//   [index: string]: number;
+//   length: number;
+//   name: string;// error :??? 
+// }
+
+// interface ReadonlyStringArray {
+//   readonly [index: number]: string;
+// }
+// let myArray2: ReadonlyStringArray = ["Alice", "Bob"];
+// myArray[2] = "Mallory"; // error!
+
+// =============Class Type
+
+// interface ClockInterface {
+//   currentTime: Date;
+//   setTime(d: Date);
+// }
+
+// class Clock implements ClockInterface {
+//   currentTime: Date;
+//   setTime(d: Date) {
+//     this.currentTime = d;
+//   }
+//   constructor(h: number, m: number) { }
+// }
+
+interface clockConstructor {
+  new(hour: number, minute: number): ClockInterface;
 }
 
-let myArray: StringArray;
-myArray = ["Bob", "Fred"];
-let myStr: string = myArray[0];
-
-class Animal {
-  name: string;
+interface ClockInterface {
+  tick();
 }
 
-class Dog extends Animal {
-  breed: string;
+function createClock(ctor: clockConstructor, hour: number, minute: number): ClockInterface {
+  return new ctor(hour, minute);
 }
 
-interface NumberDictionary {
-  [index: string]: number;
-  length: number;
-  name: string;// error :??? 
+class DigitalClock implements ClockInterface {
+  constructor (h:number,m:number){}
+  tick(){
+    console.log("beep beep");
+  }  
+}
+class AnalogClock implements ClockInterface {
+  constructor(h: number, m: number) { }
+  tick() {
+      console.log("tick tock");
+  }
 }
 
-interface ReadonlyStringArray {
-  readonly [index: number]: string;
-}
-let myArray2: ReadonlyStringArray = ["Alice", "Bob"];
-myArray[2] = "Mallory"; // error!
+let digital = createClock(DigitalClock, 12, 17);
+let analog = createClock(AnalogClock, 7, 32);
