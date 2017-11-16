@@ -70,3 +70,51 @@
 // ro.length=100;//error
 // a=ro;//error
 // a = ro as number[];
+
+
+// //===========
+
+// interface SquareConfig {
+//   color?: string;
+//   width?: number;
+// }
+
+// function createSquare(config: SquareConfig): { color: string; area: number } {
+//   let newSquare = { color: "white", area: 100 };
+//   if (config.color) {
+//     newSquare.color = config.color;
+//   }
+//   if (config.width) {
+//     newSquare.area = config.width * config.width;
+//   }
+//   return newSquare;
+// }
+
+// let mySquare = createSquare({ colour: "black", width: 100 } );
+// let mySquare1= createSquare({colour:"black", width:100} as SquareConfig);
+// let mySquare2 = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
+
+// interface SquareConfig {
+//   color?: string;
+//   width?: number;
+//   [propName: string]: any;
+// }
+
+// function createSquare(config: SquareConfig): { color: string; area: number } {
+//   let newSquare = {color: "white", area: 100};
+//   if (config.color) {
+//     newSquare.color = config.color;
+//   }
+//   if (config.width) {
+//     newSquare.area = config.width * config.width;
+//   }
+//   return newSquare;
+// }
+
+// let mySquare = createSquare({color: "black"});
+// // error: 'colour' not expected in type 'SquareConfig'
+// let mySquare1 = createSquare({ colour: "red", width: 100 });
+// let mySquare2 = createSquare({ width: 100, opacity: 0.5 } as SquareConfig);
+
+// let squareOptions = { colour: "red", width: 100 };
+// let mySquare3 = createSquare(squareOptions);
